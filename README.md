@@ -1,3 +1,1 @@
-Run  `./gradlew rALA --write-locks` to reproduce the issue
-
-
+Run `./gradlew build` to reproduce the issue:
