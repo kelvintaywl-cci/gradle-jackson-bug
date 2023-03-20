@@ -1,0 +1,27 @@
+buildscript {
+   dependencies { 
+    classpath 'com.fasterxml.jackson.core:jackson-core:2.15.0-rc1'
+   }
+}
+
+plugins {
+    id 'java'
+}
+
+configurations {
+    compileClasspath {
+        resolutionStrategy.activateDependencyLocking()
+    }
+}
+
+tasks.register('resolveAndLockAll') {
+    doFirst {
+        assert gradle.startParameter.writeDependencyLocks
+    }
+    doLast {
+        configurations.findAll {
+            // Add any custom filtering on the configurations to be resolved
+            it.canBeResolved
+        }.each { it.resolve() }
+    }
+}
